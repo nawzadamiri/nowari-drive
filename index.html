@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+    <meta name="theme-color" content="#f3e6d0" />
+    <title>Nowari Drive</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=Manrope:wght@500;650;750&display=swap" />
+    <script type="module" crossorigin src="/nowari-drive/assets/index-CtiLl9k6.js"></script>
+    <link rel="stylesheet" crossorigin href="/nowari-drive/assets/index-BwPDHgw_.css">
+  </head>
+  <body data-mode="car">
+    <div id="view"></div>
+
+    <header class="hud top">
+      <div class="brand">Nowari <span>Drive</span></div>
+      <div id="street" class="street empty"></div>
+    </header>
+
+    <nav class="hud modes" aria-label="Way to travel">
+      <button data-mode="car" aria-pressed="true" title="Car (1)">Car</button>
+      <button data-mode="walk" aria-pressed="false" title="Walk (2)">Walk</button>
+      <button data-mode="drone" aria-pressed="false" title="Drone (3)">Drone</button>
+    </nav>
+
+    <button id="guide" class="hud guide hidden" title="Next place (N)">
+      <span id="guideArrow" class="arrow" aria-hidden="true">↑</span><span id="guideLabel"></span>
+    </button>
+
+    <div class="hud dash">
+      <canvas id="minimap" aria-label="Minimap"></canvas>
+      <div class="speedo"><b id="speed">0</b><span id="unit">km/h</span></div>
+    </div>
+
+    <div class="hud tools">
+      <button id="mapBtn" title="Sketchbook map (B)">Map</button>
+      <button id="passportBtn" title="Passport (J)">Passport <b id="passportCount">0/0</b></button>
+      <button id="moodBtn" title="Time of day (T)">Golden hour</button>
+      <button id="postcardBtn" title="Postcard (F)">Postcard</button>
+      <button id="cam" title="Camera (C)">Follow</button>
+      <button id="cruiseBtn" title="Cruise control (K)" aria-pressed="false">Cruise</button>
+      <button id="recover" title="Back to the ground (R)">Recover</button>
+      <button id="pauseBtn" title="Pause (P)" aria-label="Pause">❚❚</button>
+    </div>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <div id="stampToast" class="stamp-toast" role="status" aria-live="polite"></div>
+
+    <div id="touch" class="touch">
+      <div class="pad left">
+        <button data-touch="left" aria-label="Turn left">◀</button>
+        <button data-touch="right" aria-label="Turn right">▶</button>
+      </div>
+      <div class="pad alt">
+        <button data-touch="up" aria-label="Climb">▲</button>
+        <button data-touch="down" aria-label="Descend">▼</button>
+      </div>
+      <div class="pad right">
+        <button data-touch="brake" class="brake" aria-label="Brake / back">Back</button>
+        <button data-touch="gas" class="gas" aria-label="Go">Go</button>
+      </div>
+    </div>
+
+    <section id="intro" class="panel show">
+      <div class="card">
+        <p class="eyebrow">A little city · a lovely day out</p>
+        <h1>Nowari <em>Drive</em></h1>
+        <p class="lede">Nine square kilometres of real Tampere, built as a table-top miniature. It starts as a pencil sketch: wherever you drive, walk or fly, the city is painted in. Collect passport stamps at 22 real places, from the Cathedral to the top of Näsinneula.</p>
+        <div class="loader"><i id="bar"></i></div>
+        <p id="status" class="status">Fetching the city…</p>
+        <button id="start" class="primary" disabled>Loading…</button>
+        <dl class="keys">
+          <dt>W A S D / arrows</dt><dd>Move and turn</dd>
+          <dt>1 · 2 · 3</dt><dd>Car · Walk · Drone</dd>
+          <dt>Space / Shift</dt><dd>Handbrake · run · climb / descend</dd>
+          <dt>B · J · N · F</dt><dd>Map · passport · next place · postcard</dd>
+          <dt>K</dt><dd>Cruise control (car)</dd>
+          <dt>T · G · Y · M</dt><dd>Time of day · season · weather · sound</dd>
+          <dt>C · R · P</dt><dd>Camera · recover · pause</dd>
+        </dl>
+        <p class="credit">Map data © OpenStreetMap contributors (ODbL) · Elevation and aerial photos © National Land Survey of Finland (CC BY 4.0) · Building data and 3D city model © City of Tampere · Signs, lights and stops © Fintraffic / Väylävirasto, Digiroad (CC BY 4.0)</p>
+      </div>
+    </section>
+
+    <section id="pause" class="panel">
+      <div class="card small">
+        <h2>Paused</h2>
+        <button id="resume" class="primary">Keep exploring</button>
+        <button id="restart">Return to the start</button>
+        <button id="timeBtn">Time of day</button>
+        <button id="seasonBtn">Season</button>
+        <button id="weatherBtn">Weather</button>
+        <button id="soundBtn">Sound</button>
+        <button id="lifeBtn">Traffic &amp; people</button>
+        <button id="paintBtn">Car colour</button>
+        <button id="sketchBtn">Unexplored: Sketched</button>
+        <button id="styleBtn">Style</button>
+        <button id="quality">Graphics</button>
+      </div>
+    </section>
+
+    <section id="passport" class="panel" aria-labelledby="passportTitle">
+      <div class="card wide">
+        <div class="card-head">
+          <h2 id="passportTitle">Tampere passport</h2>
+          <button id="passportClose" aria-label="Close passport">Close</button>
+        </div>
+        <p class="lede">Get close to a place to stamp it: by car, on foot, or flying low with the drone.</p>
+        <ul id="passportList" class="passport-list"></ul>
+        <button id="passportReset" class="quiet">Clear stamps</button>
+      </div>
+    </section>
+
+    <section id="map" class="panel map-panel" aria-labelledby="mapTitle">
+      <div class="map-sheet">
+        <canvas id="mapCanvas" aria-label="Sketchbook map of Tampere. Drag to move, scroll or pinch to zoom, tap a place to head there."></canvas>
+        <div class="map-head">
+          <div>
+            <h2 id="mapTitle">Sketchbook · Tampere</h2>
+            <p id="mapPainted" class="map-sub"></p>
+          </div>
+          <button id="mapClose">Close</button>
+        </div>
+        <div class="map-foot">
+          <p class="map-hint">Tap a place to head there · drag to move · scroll or pinch to zoom</p>
+          <button id="mapReset" class="quiet">Start a fresh sketchbook</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="postcard" class="panel" aria-label="Postcard">
+      <div class="card wide postcard-card">
+        <img id="postcardImg" alt="Postcard of the current view" />
+        <div class="row">
+          <a id="postcardSave" class="button primary" download>Save postcard</a>
+          <button id="postcardClose">Back to Tampere</button>
+        </div>
+      </div>
+    </section>
+
+  </body>
+</html>
