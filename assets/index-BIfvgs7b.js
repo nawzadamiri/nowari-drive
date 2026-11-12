@@ -5219,8 +5219,14 @@ vFace = aFace;`),e.fragmentShader=e.fragmentShader.replace(`#include <common>`,`
 varying vec4 vWall;
 varying vec2 vEdge;
 varying vec3 vFace;
-float winMask = 0.0; float winLit = 0.0; float winSeed = 0.0;`).replace(`#include <color_fragment>`,`#include <color_fragment>
-        if (vWall.w > 0.0) {
+float winMask = 0.0; float winLit = 0.0; float winSeed = 0.0; float gateShade = 0.0;`).replace(`#include <metalnessmap_fragment>`,`roughnessFactor = mix(roughnessFactor, 1.0, gateShade);
+#include <metalnessmap_fragment>`).replace(`totalEmissiveRadiance += uRimColor`,`totalEmissiveRadiance += (1.0 - gateShade) * uRimColor`).replace(`#include <color_fragment>`,`#include <color_fragment>
+        if (vWall.w > 0.0 && vWall.w < 0.05) {
+          // A gateway's sides, under the building: plain matt wall in its shade (no gloss: seen along the gateway,
+          // a glossy wall would mirror the sky).
+          diffuseColor.rgb *= 0.55;
+          gateShade = 1.0;
+        } else if (vWall.w > 0.0) {
           float t = vWall.z;
           float y = vWall.y, top = vWall.w;
           // Rounded edges: corners and the top edge catch a little extra light, like a crafted model.
