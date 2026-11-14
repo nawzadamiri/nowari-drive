@@ -17,8 +17,8 @@
     <title>Nowari Drive</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=Manrope:wght@500;650;750&display=swap" />
-    <script type="module" crossorigin src="/nowari-drive/assets/index-BAX6l66u.js"></script>
-    <link rel="stylesheet" crossorigin href="/nowari-drive/assets/index-Dpbn8ohA.css">
+    <script type="module" crossorigin src="/nowari-drive/assets/index-_6dErinB.js"></script>
+    <link rel="stylesheet" crossorigin href="/nowari-drive/assets/index-Dw3PET45.css">
   </head>
   <body data-mode="car">
     <div id="view"></div>
@@ -33,6 +33,12 @@
       <button data-mode="walk" aria-pressed="false" title="Walk (2)">Walk</button>
       <button data-mode="drone" aria-pressed="false" title="Drone (3)">Drone</button>
     </nav>
+
+    <div id="goal" class="hud goal" hidden role="status" aria-live="polite">
+      <div class="goal-text"><b id="goalTitle"></b><span id="goalDetail"></span></div>
+      <span id="goalClock" class="goal-clock"></span>
+      <button id="goalAct" hidden></button>
+    </div>
 
     <button id="guide" class="hud guide hidden" title="Next place (N)">
       <span id="guideArrow" class="arrow" aria-hidden="true">↑</span><span id="guideLabel"></span>
@@ -76,14 +82,16 @@
       <div class="card">
         <p class="eyebrow">A little city · a lovely day out</p>
         <h1>Nowari <em>Drive</em></h1>
-        <p class="lede">Twenty square kilometres of real Tampere, from Pispala to Messukylä, built as a table-top miniature. It starts as a pencil sketch: wherever you drive, walk or fly, the city is painted in. Collect passport stamps at real places all over the city, from the Cathedral to the top of Näsinneula and the oldest church in Tampere.</p>
+        <p class="lede">Sixty square kilometres of real Tampere, from Pispala to Hervanta, built as a table-top miniature from the city’s own data: every building, street, tree, tram stop and address where it really is.</p>
         <div class="loader"><i id="bar"></i></div>
         <p id="status" class="status">Fetching the city…</p>
-        <div class="start-choice">
-          <button id="start" class="primary" disabled>Loading…</button>
-          <button id="exploreStart" class="primary alt" disabled>Explore the map</button>
+        <div class="start-modes" role="group" aria-label="How to play">
+          <button id="start" class="mode-card journey" disabled><b>Journey</b><span>Drive, walk and fly anywhere. Collect passport stamps at real places; the city paints itself in wherever you go.</span><i id="journeyCount"></i></button>
+          <button id="exploreStart" class="mode-card" disabled><b>Explore</b><span>The 3D map: search the city, tap any building, colour it by age, use, height, trees or transport.</span></button>
+          <button id="whereStart" class="mode-card" disabled><b>Where am I?</b><span>Five spots on real streets. Look around, then guess on the map. Today’s round is the same for everyone.</span></button>
+          <button id="jobsStart" class="mode-card" disabled><b>Jobs</b><span>Drive tram lines 1 and 3 stop by stop, or deliver food from real restaurants to real addresses.</span></button>
+          <button id="huntStart" class="mode-card" disabled><b>Photo hunt</b><span>Find and photograph today’s five buildings. Frame them well for three stars.</span></button>
         </div>
-        <p class="start-note"><b>Drive</b> the streets and collect passport stamps. <b>Explore</b> flies you over the city: search it, tap any building, and see it by age, use or height.</p>
         <dl class="keys">
           <dt>W A S D / arrows</dt><dd>Move and turn</dd>
           <dt>1 · 2 · 3</dt><dd>Car · Walk · Drone</dd>
@@ -103,6 +111,7 @@
         <h2>Paused</h2>
         <button id="resume" class="primary">Keep exploring</button>
         <button id="restart">Return to the start</button>
+        <button id="modesBtn">Change mode</button>
         <button id="timeBtn">Time of day</button>
         <button id="seasonBtn">Season</button>
         <button id="weatherBtn">Weather</button>
@@ -166,6 +175,10 @@
           <button id="mapNorth" title="Face north" aria-label="Face north"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 3 16 12H8z" fill="#c8553d"/><path d="M12 21 8 12h8z" fill="currentColor" opacity=".45"/></svg></button>
           <button id="mapMe" title="Back to you" aria-label="Back to you"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="#c8553d"/><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="2"/></svg></button>
         </div>
+        <div class="guess-bar">
+          <p id="guessText"></p>
+          <div class="row"><button id="guessGo" class="primary" disabled>Guess</button><button id="guessBack">Look again</button></div>
+        </div>
         <div class="map-foot">
           <p class="map-hint" data-live="Drag to move · scroll or pinch to zoom · right-drag to turn and tilt · tap a building to see what it is" data-sketch="Tap a place to head there · drag to move · scroll or pinch to zoom"></p>
           <button id="mapReset" class="quiet">Start a fresh sketchbook</button>
@@ -182,6 +195,12 @@
         </div>
       </div>
     </section>
+
+    <section id="modePanel" class="panel" aria-live="polite">
+      <div class="card wide mode-sheet"><div id="modeBody"></div></div>
+    </section>
+
+    <div id="veil" class="veil" aria-live="polite"><p id="veilText"></p></div>
 
   </body>
 </html>
