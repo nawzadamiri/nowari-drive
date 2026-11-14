@@ -1,10 +1,10 @@
 {
  "format": 3,
  "areas": {
-  "hervanta": "Tampere · Hervanta",
-  "tampere-core": "Tampere · Pispala to Messukylä, Näsijärvi to Nekala"
+  "tampere-core": "Tampere · Pispala to Hervanta, Näsijärvi to Pyhäjärvi"
  },
  "inside": {
+  "hervanta": "tampere-core",
   "kaleva": "tampere-core"
  }
 }
