@@ -1,0 +1,12 @@
+{
+  "name": "Nowari Drive",
+  "short_name": "Nowari",
+  "description": "Drive, walk and fly through a painted Tampere built from the city's real data.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "fullscreen",
+  "orientation": "any",
+  "background_color": "#f3e6d0",
+  "theme_color": "#f3e6d0",
+  "icons": [{ "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }]
+}
