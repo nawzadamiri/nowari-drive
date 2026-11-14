@@ -17,8 +17,8 @@
     <title>Nowari Drive</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=Manrope:wght@500;650;750&display=swap" />
-    <script type="module" crossorigin src="/nowari-drive/assets/index-ccxcMYS-.js"></script>
-    <link rel="stylesheet" crossorigin href="/nowari-drive/assets/index-D0fdCKTP.css">
+    <script type="module" crossorigin src="/nowari-drive/assets/index-Dh4f_9fK.js"></script>
+    <link rel="stylesheet" crossorigin href="/nowari-drive/assets/index-Dpbn8ohA.css">
   </head>
   <body data-mode="car">
     <div id="view"></div>
@@ -79,13 +79,18 @@
         <p class="lede">Twenty square kilometres of real Tampere, from Pispala to Messukylä, built as a table-top miniature. It starts as a pencil sketch: wherever you drive, walk or fly, the city is painted in. Collect passport stamps at real places all over the city, from the Cathedral to the top of Näsinneula and the oldest church in Tampere.</p>
         <div class="loader"><i id="bar"></i></div>
         <p id="status" class="status">Fetching the city…</p>
-        <button id="start" class="primary" disabled>Loading…</button>
+        <div class="start-choice">
+          <button id="start" class="primary" disabled>Loading…</button>
+          <button id="exploreStart" class="primary alt" disabled>Explore the map</button>
+        </div>
+        <p class="start-note"><b>Drive</b> the streets and collect passport stamps. <b>Explore</b> flies you over the city: search it, tap any building, and see it by age, use or height.</p>
         <dl class="keys">
           <dt>W A S D / arrows</dt><dd>Move and turn</dd>
           <dt>1 · 2 · 3</dt><dd>Car · Walk · Drone</dd>
           <dt>Space / Shift</dt><dd>Handbrake · run · climb / descend</dd>
           <dt>B · J · N · F</dt><dd>3D map · passport · next place · postcard</dd>
           <dt>K</dt><dd>Cruise control (car)</dd>
+          <dt>L</dt><dd>Copy a link to this spot (to report what looks wrong)</dd>
           <dt>T · G · Y · M</dt><dd>Time of day · season · weather · sound</dd>
           <dt>C · R · P</dt><dd>Camera · recover · pause</dd>
         </dl>
@@ -136,6 +141,23 @@
             <button id="mapClose">Close</button>
           </div>
         </div>
+        <div class="map-explore">
+          <div class="map-search">
+            <input id="mapSearch" type="search" placeholder="Search places, buildings, streets" autocomplete="off" aria-label="Search the map" />
+            <ul id="mapResults" class="map-results" role="listbox" aria-label="Search results"></ul>
+          </div>
+          <div id="mapLayers" class="map-layers" role="group" aria-label="Colour the buildings by">
+            <button data-layer="look" aria-pressed="true">As it looks</button>
+            <button data-layer="age" aria-pressed="false">Age</button>
+            <button data-layer="use" aria-pressed="false">Use</button>
+            <button data-layer="height" aria-pressed="false">Height</button>
+          </div>
+          <div id="mapLegend" class="map-legend" aria-live="polite"></div>
+        </div>
+        <div id="mapCard" class="map-card" hidden>
+          <div id="mapCardBody"></div>
+          <div class="map-card-actions"><button id="mapDrive" class="primary">Drive from here</button><button id="mapCardClose" class="quiet">Close</button></div>
+        </div>
         <div class="map-tools" aria-label="Map controls">
           <button id="mapIn" title="Zoom in (+)" aria-label="Zoom in">+</button>
           <button id="mapOut" title="Zoom out (−)" aria-label="Zoom out">−</button>
@@ -143,7 +165,7 @@
           <button id="mapMe" title="Back to you" aria-label="Back to you"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="#c8553d"/><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="2"/></svg></button>
         </div>
         <div class="map-foot">
-          <p class="map-hint" data-live="Drag to move · scroll or pinch to zoom · right-drag to turn and tilt · tap a place to head there" data-sketch="Tap a place to head there · drag to move · scroll or pinch to zoom"></p>
+          <p class="map-hint" data-live="Drag to move · scroll or pinch to zoom · right-drag to turn and tilt · tap a building to see what it is" data-sketch="Tap a place to head there · drag to move · scroll or pinch to zoom"></p>
           <button id="mapReset" class="quiet">Start a fresh sketchbook</button>
         </div>
       </div>
