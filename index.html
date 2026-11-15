@@ -17,8 +17,8 @@
     <title>Nowari Drive</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=Manrope:wght@500;650;750&display=swap" />
-    <script type="module" crossorigin src="/nowari-drive/assets/index-_6dErinB.js"></script>
-    <link rel="stylesheet" crossorigin href="/nowari-drive/assets/index-Dw3PET45.css">
+    <script type="module" crossorigin src="/nowari-drive/assets/index-CB2PJUSS.js"></script>
+    <link rel="stylesheet" crossorigin href="/nowari-drive/assets/index-Cbe--Bu7.css">
   </head>
   <body data-mode="car">
     <div id="view"></div>
@@ -102,7 +102,7 @@
           <dt>T · G · Y · M</dt><dd>Time of day · season · weather · sound</dd>
           <dt>C · R · P</dt><dd>Camera · recover · pause</dd>
         </dl>
-        <p class="credit">Map data © OpenStreetMap contributors (ODbL) · Elevation and aerial photos © National Land Survey of Finland (CC BY 4.0) · Building data and 3D city model © City of Tampere · Signs, lights and stops © Fintraffic / Väylävirasto, Digiroad (CC BY 4.0)</p>
+        <p class="credit">Map data © OpenStreetMap contributors (ODbL) · Elevation and aerial photos © National Land Survey of Finland (CC BY 4.0) · Building data and 3D city model © City of Tampere · Signs, lights and stops © Fintraffic / Väylävirasto, Digiroad (CC BY 4.0) · <span id="version"></span></p>
       </div>
     </section>
 
@@ -112,6 +112,8 @@
         <button id="resume" class="primary">Keep exploring</button>
         <button id="restart">Return to the start</button>
         <button id="modesBtn">Change mode</button>
+        <button id="shareSpot">Share this spot</button>
+        <button id="reportSpot">Something looks wrong here</button>
         <button id="timeBtn">Time of day</button>
         <button id="seasonBtn">Season</button>
         <button id="weatherBtn">Weather</button>
@@ -191,6 +193,7 @@
         <img id="postcardImg" alt="Postcard of the current view" />
         <div class="row">
           <a id="postcardSave" class="button primary" download>Save postcard</a>
+          <button id="postcardSend">Send</button>
           <button id="postcardClose">Back to Tampere</button>
         </div>
       </div>
