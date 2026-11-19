@@ -17,8 +17,8 @@
     <title>Nowari Drive</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=Manrope:wght@500;650;750&display=swap" />
-    <script type="module" crossorigin src="/nowari-drive/assets/index-DuumBtnJ.js"></script>
-    <link rel="stylesheet" crossorigin href="/nowari-drive/assets/index-DFreXV-C.css">
+    <script type="module" crossorigin src="/nowari-drive/assets/index-3RzEqJz0.js"></script>
+    <link rel="stylesheet" crossorigin href="/nowari-drive/assets/index-Q4v2TDAI.css">
   </head>
   <body data-mode="car">
     <div id="view"></div>
@@ -64,10 +64,7 @@
     <div id="stampToast" class="stamp-toast" role="status" aria-live="polite"></div>
 
     <div id="touch" class="touch">
-      <div class="pad left">
-        <button data-touch="left" aria-label="Turn left">◀</button>
-        <button data-touch="right" aria-label="Turn right">▶</button>
-      </div>
+      <div class="stick-zone" aria-hidden="true"><div class="stick"><i></i></div></div>
       <div class="pad alt">
         <button data-touch="up" aria-label="Climb">▲</button>
         <button data-touch="down" aria-label="Descend">▼</button>
@@ -118,6 +115,7 @@
             <dt>C · R · P</dt><dd>Camera · recover · pause</dd>
           </dl>
         </details>
+        <button id="pauseRecover">Back on the road</button>
         <button id="restart">Return to the start</button>
         <button id="modesBtn">Change mode</button>
         <button id="shareSpot">Share this spot</button>
@@ -212,6 +210,15 @@
     </section>
 
     <div id="veil" class="veil" aria-live="polite"><p id="veilText"></p></div>
+
+    <section id="turn" class="panel turn" role="alertdialog" aria-labelledby="turnTitle">
+      <div class="card small">
+        <svg class="turn-phone" viewBox="0 0 64 64" aria-hidden="true"><rect x="20" y="8" width="24" height="44" rx="5" fill="none" stroke="currentColor" stroke-width="4"/><path d="M50 40a18 18 0 0 1-14 14" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/><path d="M33 50l4 4-4 4" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h2 id="turnTitle">Turn your phone sideways</h2>
+        <p class="lede">The city plays in landscape. Menus, the passport and the map work either way.</p>
+        <button id="turnAnyway" class="quiet">Play upright anyway</button>
+      </div>
+    </section>
 
   </body>
 </html>
