@@ -3,7 +3,9 @@
 // always the right one: it is used first, and the network only for what is not kept yet. Each map version has a store
 // of its own, and the stores of older versions are dropped when a new one is first used.
 // Everything else (the page, the game's code) comes from the network first, so a new version is never held back; its
-// kept copy is used only when the network fails (no signal, a tunnel).
+// kept copy is used only when the network fails (no signal, a tunnel). The page and the other files without a version
+// in their name are always checked with the site (the site lets a browser keep them 10 minutes, which held a new
+// version back): an unchanged file costs only the check. The game's code files carry their version in their name.
 const FILES = 'nowari-files-2', MAPS = 'nowari-map-';
 self.addEventListener('install', () => self.skipWaiting());
 // The first store kept the map files too, under addresses no game asks for any more.
@@ -31,7 +33,8 @@ self.addEventListener('fetch', e => {
     }))).catch(() => fetch(req)));
     return;
   }
-  e.respondWith(fetch(req).then(res => {
+  const fresh = req.mode === 'navigate' || !url.pathname.includes('/assets/');
+  e.respondWith(fetch(fresh ? new Request(req, { cache: 'no-cache' }) : req).then(res => {
     if (res.ok && res.status === 200) {
       const copy = res.clone();
       e.waitUntil(caches.open(FILES).then(c => c.put(req, copy)).catch(() => {}));
