@@ -17,8 +17,8 @@
     <title>Nowari Drive</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=Manrope:wght@500;650;750&display=swap" />
-    <script type="module" crossorigin src="/nowari-drive/assets/index-wyBFZxpM.js"></script>
-    <link rel="stylesheet" crossorigin href="/nowari-drive/assets/index-CzUCb-Fs.css">
+    <script type="module" crossorigin src="/nowari-drive/assets/index-DuumBtnJ.js"></script>
+    <link rel="stylesheet" crossorigin href="/nowari-drive/assets/index-DFreXV-C.css">
   </head>
   <body data-mode="car">
     <div id="view"></div>
@@ -87,6 +87,10 @@
         <p id="status" class="status">Fetching the city…</p>
         <div class="start-modes" role="group" aria-label="How to play">
           <button id="start" class="mode-card journey" disabled><b>Journey</b><span>Drive, walk and fly anywhere. Collect passport stamps at real places; the city paints itself in wherever you go.</span><i id="journeyCount"></i></button>
+          <div class="map-search start-at">
+            <input id="startAt" type="search" placeholder="Or start at an address or place…" autocomplete="off" aria-label="Start the Journey at an address or place" disabled />
+            <ul id="startResults" class="map-results" role="listbox" aria-label="Places to start at"></ul>
+          </div>
           <button id="exploreStart" class="mode-card" disabled><b>Explore</b><span>The 3D map: search the city, tap any building, colour it by age, use, height, trees or transport.</span></button>
           <button id="whereStart" class="mode-card" disabled><b>Where am I?</b><span>Five spots on real streets. Look around, then guess on the map. Today’s round is the same for everyone.</span></button>
           <button id="jobsStart" class="mode-card" disabled><b>Jobs</b><span>Drive tram lines 1 and 3 stop by stop, or deliver food from real restaurants to real addresses.</span></button>
