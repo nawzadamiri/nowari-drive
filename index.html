@@ -17,8 +17,8 @@
     <title>Nowari Drive</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=Manrope:wght@500;650;750&display=swap" />
-    <script type="module" crossorigin src="/nowari-drive/assets/index-Bw7_Ttl4.js"></script>
-    <link rel="stylesheet" crossorigin href="/nowari-drive/assets/index-BT_JNy1G.css">
+    <script type="module" crossorigin src="/nowari-drive/assets/index-CRXoikSM.js"></script>
+    <link rel="stylesheet" crossorigin href="/nowari-drive/assets/index-CzUCb-Fs.css">
   </head>
   <body data-mode="car">
     <div id="view"></div>
@@ -92,16 +92,7 @@
           <button id="jobsStart" class="mode-card" disabled><b>Jobs</b><span>Drive tram lines 1 and 3 stop by stop, or deliver food from real restaurants to real addresses.</span></button>
           <button id="huntStart" class="mode-card" disabled><b>Photo hunt</b><span>Find and photograph today’s five buildings. Frame them well for three stars.</span></button>
         </div>
-        <dl class="keys">
-          <dt>W A S D / arrows</dt><dd>Move and turn</dd>
-          <dt>1 · 2 · 3</dt><dd>Car · Walk · Drone</dd>
-          <dt>Space / Shift</dt><dd>Handbrake · run · climb / descend</dd>
-          <dt>B · J · N · F</dt><dd>3D map · passport · next place · postcard</dd>
-          <dt>K</dt><dd>Cruise control (car)</dd>
-          <dt>L</dt><dd>Copy a link to this spot (to report what looks wrong)</dd>
-          <dt>T · G · Y · M</dt><dd>Time of day · season · weather · sound</dd>
-          <dt>C · R · P</dt><dd>Camera · recover · pause</dd>
-        </dl>
+        <p class="keys-short"><b>W A S D</b> or <b>arrows</b> to move · <b>P</b> pauses and lists every key</p>
         <p class="credit">Map data © OpenStreetMap contributors (ODbL) · Elevation and aerial photos © National Land Survey of Finland (CC BY 4.0) · Building data and 3D city model © City of Tampere · Signs, lights and stops © Fintraffic / Väylävirasto, Digiroad (CC BY 4.0) · <span id="version"></span></p>
       </div>
     </section>
@@ -110,6 +101,19 @@
       <div class="card small">
         <h2>Paused</h2>
         <button id="resume" class="primary">Keep exploring</button>
+        <details class="keys-all">
+          <summary>Keys</summary>
+          <dl class="keys">
+            <dt>W A S D / arrows</dt><dd>Move and turn</dd>
+            <dt>1 · 2 · 3</dt><dd>Car · Walk · Drone</dd>
+            <dt>Space / Shift</dt><dd>Handbrake · run · climb / descend</dd>
+            <dt>B · J · N · F</dt><dd>3D map · passport · next place · postcard</dd>
+            <dt>K</dt><dd>Cruise control (car)</dd>
+            <dt>L</dt><dd>Copy a link to this spot (to report what looks wrong)</dd>
+            <dt>T · G · Y · M</dt><dd>Time of day · season · weather · sound</dd>
+            <dt>C · R · P</dt><dd>Camera · recover · pause</dd>
+          </dl>
+        </details>
         <button id="restart">Return to the start</button>
         <button id="modesBtn">Change mode</button>
         <button id="shareSpot">Share this spot</button>
