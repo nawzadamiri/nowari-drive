@@ -1,5 +1,5 @@
 {
- "format": 9,
+ "format": 10,
  "areas": {
   "tampere-core": "Tampere · Pispala to Hervanta, Näsijärvi to Pyhäjärvi"
  },
@@ -9,7 +9,7 @@
  },
  "sizes": {
   "tampere-core": {
-   "world.json": 3375934,
+   "world.json": 451678,
    "terrain-coarse.bin": 229590,
    "roads.bin": 1857113,
    "buildings.bin": 3277333
