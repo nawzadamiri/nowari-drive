@@ -6,6 +6,13 @@
 // version back): an unchanged file costs only the check. The game's code files carry their version in their name.
 const FILES = 'nowari-files-2', MAPS = 'nowari-map-files', CLIENT_MAPS = 'nowari-client-maps';
 const legacyVersion = /^(?:[0-9a-f]{10}|none)$/;
+const verified = new Set();
+
+async function isCurrent(response, expected) {
+  const bytes = await response.clone().arrayBuffer();
+  const digest = new Uint8Array(await crypto.subtle.digest('SHA-1', bytes), 0, 6);
+  return Array.from(digest, n => n.toString(16).padStart(2, '0')).join('') === expected;
+}
 self.addEventListener('install', () => self.skipWaiting());
 self.addEventListener('activate', e => e.waitUntil(
   caches.delete('nowari-files').catch(() => {}).then(() => self.clients.claim()),
@@ -46,6 +53,7 @@ async function rememberMap(id, map) {
       return !live.has(req.url) && (legacyVersion.test(url.searchParams.get('v') ?? '')
         || [...roots].some(root => req.url.startsWith(root)));
     });
+    for (const req of stale) verified.delete(req.url);
     const legacy = (await caches.keys()).filter(name => name.startsWith('nowari-map-') && legacyVersion.test(name.slice(11)));
     await Promise.all([...stale.map(req => store.delete(req)), ...legacy.map(name => caches.delete(name))]);
   }
@@ -83,19 +91,34 @@ self.addEventListener('fetch', e => {
   const v = url.searchParams.get('v');
   if (v && url.pathname.includes('/data/')) {
     e.respondWith((async () => {
-      const store = await caches.open(MAPS);
+      const store = await caches.open(MAPS).catch(() => null);
       const old = legacyVersion.test(v);
-      const hit = req.cache !== 'reload' && (await store.match(req) || (old && await caches.match(req)));
-      if (hit) return hit;
+      const pinned = /^[0-9a-f]{12}$/.test(v);
+      const hit = req.cache !== 'reload' &&
+        (await store?.match(req).catch(() => undefined) || (old && await caches.match(req).catch(() => undefined)));
+      if (hit) {
+        if (!pinned || verified.has(req.url) || await isCurrent(hit, v)) {
+          if (pinned) verified.add(req.url);
+          return hit;
+        }
+        await store?.delete(req).catch(() => {});
+      }
       const res = await fetch(req);
+      if (pinned && res.ok && !await isCurrent(res, v)) {
+        return new Response('Map version changed. Reload to get the current city.', { status: 409 });
+      }
       const active = activeMaps.get(e.clientId);
       if (res.ok && res.status === 200 && (!active || !req.url.startsWith(active.root) || active.urls.has(req.url))) {
         const copy = res.clone();
         e.waitUntil((old ? caches.open(`nowari-map-${v}`) : Promise.resolve(store))
-          .then(cache => cache.put(req, copy)).catch(() => {}));
+          .then(async cache => {
+            if (!cache) return;
+            await cache.put(req, copy);
+            if (pinned) verified.add(req.url);
+          }).catch(() => {}));
       }
       return res;
-    })().catch(() => fetch(req)));
+    })());
     return;
   }
   const fresh = req.mode === 'navigate' || !url.pathname.includes('/assets/');

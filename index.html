@@ -17,8 +17,8 @@
     <title>Nowari Drive</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=Manrope:wght@500;650;750&display=swap" />
-    <script type="module" crossorigin src="/nowari-drive/assets/index-B-3CYP7e.js"></script>
-    <link rel="stylesheet" crossorigin href="/nowari-drive/assets/index-D4xDVkEw.css">
+    <script type="module" crossorigin src="/nowari-drive/assets/index-CRvyW7XR.js"></script>
+    <link rel="stylesheet" crossorigin href="/nowari-drive/assets/index-BZUAGGBb.css">
   </head>
   <body data-mode="car">
     <div id="view"></div>
@@ -81,9 +81,12 @@
         <h1>Nowari <em>Drive</em></h1>
         <p class="lede">Sixty square kilometres of real Tampere, from Pispala to Hervanta, built as a table-top miniature from the city’s own data: every building, street, tree, tram stop and address where it really is.</p>
         <div class="loader"><i id="bar"></i></div>
-        <p id="status" class="status">Fetching the city…</p>
+        <p id="status" class="status" role="status">Fetching the city…</p>
+        <button id="bootRetry" hidden>Try again</button>
         <div class="start-modes" role="group" aria-label="How to play">
           <button id="start" class="mode-card journey" disabled><b>Journey</b><span>Drive, walk and fly anywhere. Collect passport stamps at real places; the city paints itself in wherever you go.</span><i id="journeyCount"></i></button>
+          <button id="shortOuting" class="mode-card outing" aria-label="First outing to Tampere Cathedral" disabled hidden><b>First outing</b></button>
+          <button id="hervantaOuting" class="mode-card outing" aria-label="Hervanta outing to Hervanta Church" disabled hidden><b>Hervanta outing</b></button>
           <div class="map-search start-at">
             <input id="startAt" type="search" placeholder="Or start at an address or place…" autocomplete="off" aria-label="Start the Journey at an address or place" disabled />
             <ul id="startResults" class="map-results" role="listbox" aria-label="Places to start at"></ul>
@@ -210,7 +213,9 @@
       <div class="card wide mode-sheet"><div id="modeBody"></div></div>
     </section>
 
-    <div id="veil" class="veil" aria-live="polite"><p id="veilText"></p></div>
+    <div id="veil" class="veil"><div><p id="veilText" aria-live="polite"></p><div id="travelRecovery" hidden>
+      <button id="travelRetry">Try again</button><button id="travelCancel">Stay here</button>
+    </div></div></div>
 
     <section id="turn" class="panel turn" role="alertdialog" aria-labelledby="turnTitle">
       <div class="card small">
