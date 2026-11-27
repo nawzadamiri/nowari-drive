@@ -10,9 +10,9 @@
  },
  "sizes": {
   "tampere": {
-   "world.json": 3411047,
+   "world.json": 3411139,
    "terrain-coarse.bin": 403126,
-   "roads.bin": 2419766,
+   "roads.bin": 2419724,
    "buildings.bin": 4693943
   },
   "turku": {
