@@ -1,0 +1,28 @@
+{
+ "format": 10,
+ "areas": {
+  "tampere": "Tampere",
+  "turku": "Turku"
+ },
+ "inside": {
+  "hervanta": "tampere",
+  "kaleva": "tampere"
+ },
+ "sizes": {
+  "tampere": {
+   "world.json": 3411047,
+   "terrain-coarse.bin": 403126,
+   "roads.bin": 2417898,
+   "buildings.bin": 4693943
+  },
+  "turku": {
+   "world.json": 1746946,
+   "terrain-coarse.bin": 304038,
+   "roads.bin": 2011918,
+   "buildings.bin": 3753040
+  }
+ },
+ "replaces": {
+  "tampere-core": "tampere"
+ }
+}
