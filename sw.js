@@ -9,7 +9,7 @@
 // in their name are always checked with the site (the site lets a browser keep them 10 minutes, which held a new
 // version back): an unchanged file costs only the check. The game's code files carry their version in their name.
 const FILES = 'nowari-files-2', MAPS = 'nowari-map-files', CLIENT_MAPS = 'nowari-client-maps';
-const SHELL = [".","icon.svg","manifest.webmanifest","assets/index-D7TktNjj.js","assets/index-NXq4nx9Y.css","assets/sketch.worker-UI-zw6Tf.js","assets/tools-Bcq6EeUS.js"]; // Vite replaces this with the exact production entry page and assets.
+const SHELL = [".","icon.svg","manifest.webmanifest","assets/index-6O2rrn-q.js","assets/index-NXq4nx9Y.css","assets/sketch.worker-DJKrOLHh.js","assets/tools-Blf3pgrT.js"]; // Vite replaces this with the exact production entry page and assets.
 const legacyVersion = /^(?:[0-9a-f]{10}|none)$/;
 const verified = new Set();
 
